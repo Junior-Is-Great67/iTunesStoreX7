@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+// couldn't merge the storefront and the tweak into one so here they are in different projects!
+
 static NSString * const kBagHandledKey = @"StorefrontHandled";
 
 @interface StoreFrontInterceptor : NSURLProtocol
@@ -34,6 +36,7 @@ static NSString * const kBagHandledKey = @"StorefrontHandled";
     return mutableReq;
 }
 
+// todo: add a custom storefont editor OR edit the request in realtime (in case the user wants the featured page)
 - (void)startLoading {
     id<NSURLProtocolClient> client = [self client];
     NSURLRequest *request = [self request];

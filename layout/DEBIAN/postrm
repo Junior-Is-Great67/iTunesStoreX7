@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # kill the itunesstored process
+# this doesnt stop the tweak from working so i'll create smth that will fix that
 killall itunesstored
 
 echo "YOU NEED TO RESTART YOUR WHOLE DEVICE TO REVERT THE TWEAK"

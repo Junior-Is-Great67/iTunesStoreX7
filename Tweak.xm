@@ -8,14 +8,13 @@ static NSString * const kBagHandledKey = @"BagInterceptorHandled";
 
 @implementation BagURLProtocol
 
+    // tried to rewrite this 3 times and this was the only working one
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
     if ([NSURLProtocol propertyForKey:kBagHandledKey inRequest:request]) {
         return NO;
     }
     NSURL *url = request.URL;
     if (!url) return NO;
-
-    // Match init.itunes.apple.com/bag.xml (ignore query params)
     if ([[url.host lowercaseString] isEqualToString:@"init.itunes.apple.com"]) {
         NSString *path = url.path ?: @"";
         if ([path caseInsensitiveCompare:@"/bag.xml"] == NSOrderedSame) {
@@ -24,7 +23,7 @@ static NSString * const kBagHandledKey = @"BagInterceptorHandled";
     }
     return NO;
 }
-
+// strip out query params
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
     NSURLComponents *comps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:NO];
     comps.query = nil;
@@ -33,6 +32,7 @@ static NSString * const kBagHandledKey = @"BagInterceptorHandled";
     return mutableReq;
 }
 
+// hacked af and is NOT the best method; planned to be rewritten
 - (void)startLoading {
     NSMutableURLRequest *handledReq = (NSMutableURLRequest *)[self.request mutableCopy];
     [NSURLProtocol setProperty:@YES forKey:kBagHandledKey inRequest:handledReq];
@@ -53,11 +53,11 @@ static NSString * const kBagHandledKey = @"BagInterceptorHandled";
 }
 
 - (void)stopLoading {
-    // No-op: we didn't start a network task
 }
 
 @end
 
+// easier way to clear a directory
 static void clearDir(NSString *path) {
     NSFileManager *fm = [NSFileManager defaultManager];
     BOOL isDir;
@@ -80,12 +80,13 @@ static void clearDir(NSString *path) {
 %ctor {
     @autoreleasepool {
         NSString *bundleID = [[NSBundle mainBundle] bundleIdentifier];
+        // note: safari was here for testing; will be removed soon
         if ([bundleID isEqualToString:@"com.apple.AppStore"] ||
             [bundleID isEqualToString:@"com.apple.mobilesafari"]||
             [bundleID isEqualToString:@"com.apple.itunesstored"] ||
             [bundleID isEqualToString:@"com.apple.MobileStore"]) {
 
-            // Clear caches before the app/daemon runs much
+            // this might cause issues later on
             NSArray *dirs = @[
                 @"/var/mobile/Library/Caches/com.apple.itunesstored",
                 @"/var/mobile/Library/Caches/com.apple.AppStore",
