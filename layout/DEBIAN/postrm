@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# kill the itunesstored process
+killall itunesstored
+
+echo "YOU NEED TO RESTART YOUR WHOLE DEVICE TO REVERT THE TWEAK"

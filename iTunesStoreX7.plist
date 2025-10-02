@@ -1,0 +1,14 @@
+<plist version="1.0">
+ <dict>
+  <key>Filter</key>
+  <dict>
+   <key>Bundles</key>
+   <array>
+    <string>com.apple.AppStore</string>
+    <string>com.apple.mobilesafari</string>
+    <string>com.apple.itunesstored</string>
+    <string>com.apple.MobileStore</string>
+   </array>
+  </dict>
+ </dict>
+</plist>

@@ -1,0 +1,10 @@
+Package: org.jyvee8games.itunesfix
+Name: iTunesStoreX7
+Version: 0.2
+Architecture: iphoneos-arm
+Description: A fix for the iOS 7 AppStore! Original Tweak & Method by bag.xml & Requis!
+Maintainer: Jyvee
+Author: Jyvee
+Icon: file:///Library/Application%20Support/org.jyvee8games.itunesfix/Icon.png
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 7.0)
