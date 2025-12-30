@@ -4,4 +4,8 @@
 # this doesnt stop the tweak from working so i'll create smth that will fix that
 killall itunesstored
 
+# revert the security patch
+rm -r /System/Library/Frameworks/Security.framework
+mv /System/Library/Frameworks/Security.framework.bak /System/Library/Frameworks/Security.framework
+
 echo "YOU NEED TO RESTART YOUR WHOLE DEVICE TO REVERT THE TWEAK"

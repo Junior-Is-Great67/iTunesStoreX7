@@ -1,3 +1,7 @@
 #!/bin/bash
 
+# patches the security to enable new certs (fixes 7.0.x purchases and probably other stuff)
+mv /System/Library/Frameworks/Security.framework /System/Library/Frameworks/Security.framework.bak
+cp -r /Library/Application\ Support/org.jyvee8games.itunesfix/Security.framework /System/Library/Frameworks/Security.framework
+
 echo "YOU NEED TO RESTART YOUR WHOLE DEVICE TO GET THIS TWEAK WORKING!"
